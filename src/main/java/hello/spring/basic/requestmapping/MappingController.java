@@ -85,4 +85,18 @@ public class MappingController {
         log.info("mappingParam = {}",mode);
         return "ok";
     }
+
+    /**
+     * 특정 헤더로 추가 매핑
+     * headers="mode",
+     * headers="!mode"
+     * headers="mode=debug"
+     * headers="mode!=debug" (! = )
+     * header정보에 mode=debug 정보가 있어야만 호출된다.
+     */
+    @GetMapping(value = "/mapping-header", headers = "mode=debug")
+    public String mappingHeader() {
+        log.info("mappingHeader");
+        return "ok";
+    }
 }
