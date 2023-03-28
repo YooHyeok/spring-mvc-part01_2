@@ -67,4 +67,22 @@ public class MappingController {
         log.info("mappingPath userId={}, orderId={}", userId, orderId);
         return "ok";
     }
+
+    /**
+     * 파라미터로 추가 매핑
+     * params="mode",
+     * params="!mode"
+     * params="mode=debug"
+     * params="mode!=debug" (! = )
+     * params = {"mode=debug","data=good"}
+     *
+     * /mapping-param 입력시 400 BadRequest
+     * /mapping-param?mode=debug 입력시 200 Ok
+     * 즉 mode=debug값을 갖는 파라미터를 가져야만 호출이된다. (파라미터가 일치하더라도 값이 다르면 400 Error)
+     */
+    @GetMapping(value = "/mapping-param", params = "mode=debug")
+    public String mappingParam(String mode) {
+        log.info("mappingParam = {}",mode);
+        return "ok";
+    }
 }
