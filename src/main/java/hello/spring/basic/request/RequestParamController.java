@@ -83,4 +83,20 @@ public class RequestParamController {
 
         return "ok";
     }
+
+    /**
+     * HTTP 요청 파라미터 필수
+     * @RequestParam
+     * defaultValue : [age=] 빈문자 형태 혹은 파라미터 생략시 대신할 값
+     * required = true일때 => 값 필수이며 값이 없다면 guest로 대체
+     * required = false일때 => 값 생략 가능하며 값이 없다면 guest로 대체
+     */
+    @ResponseBody
+    @RequestMapping("/request-param-default")
+    public String requestParamRequired(@RequestParam(required = true, defaultValue = "guest") String username,
+                                       @RequestParam(required = false, defaultValue = "-1") int age) {
+        log.info("username={}, age={}", username, age);
+
+        return "ok";
+    }
 }
