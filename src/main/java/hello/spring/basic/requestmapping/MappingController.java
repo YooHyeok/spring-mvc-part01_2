@@ -115,4 +115,21 @@ public class MappingController {
         log.info("mappingConsumes");
         return "ok";
     }
+
+    /**
+     * Accept 헤더 기반 Media Type
+     * produces = "text/html"
+     * produces = "!text/html"
+     * produces = "text/*"
+     * produces = "*\/*"
+     * [PostMan] - Headers Accept값 수정 (체크 해제 후 최하단에 Accept직접 입력)
+     * application/json 지정시 => Not Acceptable 406 Error 발생
+     * text/html 지정시 => 200 Ok
+     */
+    @PostMapping(value = "/mapping-produce", produces = "text/html")
+    public String mappingProduces() {
+        log.info("mappingProduces");
+        return "ok";
+    }
+
 }
