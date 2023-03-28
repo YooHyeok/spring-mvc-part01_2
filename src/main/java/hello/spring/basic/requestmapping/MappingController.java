@@ -2,7 +2,10 @@ package hello.spring.basic.requestmapping;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.*;
 
 /**
  * 요청 매핑
@@ -110,7 +113,8 @@ public class MappingController {
      * MediaType.APPLICATION_JSON_VALUE
      * [PostMan] - Body -> raw -> JSON -> {"123":"123"} [Send]
      */
-    @PostMapping(value = "/mapping-consume", consumes = "application/json")
+    @PostMapping(value = "/mapping-consume", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @PostMapping(value = "/mapping-consume", consumes = "application/json")
     public String mappingConsumes() {
         log.info("mappingConsumes");
         return "ok";
@@ -126,7 +130,8 @@ public class MappingController {
      * application/json 지정시 => Not Acceptable 406 Error 발생
      * text/html 지정시 => 200 Ok
      */
-    @PostMapping(value = "/mapping-produce", produces = "text/html")
+    @PostMapping(value = "/mapping-produce", produces = MediaType.TEXT_HTML_VALUE)
+//    @PostMapping(value = "/mapping-produce", produces = "text/html")
     public String mappingProduces() {
         log.info("mappingProduces");
         return "ok";
