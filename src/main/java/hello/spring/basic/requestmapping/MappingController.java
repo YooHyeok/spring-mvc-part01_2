@@ -93,10 +93,26 @@ public class MappingController {
      * headers="mode=debug"
      * headers="mode!=debug" (! = )
      * header정보에 mode=debug 정보가 있어야만 호출된다.
+     * [PostMan] - Headers 최하단 Key : mode / Value : debug 입력
      */
     @GetMapping(value = "/mapping-header", headers = "mode=debug")
     public String mappingHeader() {
         log.info("mappingHeader");
+        return "ok";
+    }
+
+    /**
+     * Content-Type 헤더 기반 추가 매핑 Media Type
+     * consumes="application/json"
+     * consumes="!application/json"
+     * consumes="application/*"
+     * consumes="*\/*"
+     * MediaType.APPLICATION_JSON_VALUE
+     * [PostMan] - Body -> raw -> JSON -> {"123":"123"} [Send]
+     */
+    @PostMapping(value = "/mapping-consume", consumes = "application/json")
+    public String mappingConsumes() {
+        log.info("mappingConsumes");
         return "ok";
     }
 }
