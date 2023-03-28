@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -96,6 +97,20 @@ public class RequestParamController {
     public String requestParamRequired(@RequestParam(required = true, defaultValue = "guest") String username,
                                        @RequestParam(required = false, defaultValue = "-1") int age) {
         log.info("username={}, age={}", username, age);
+
+        return "ok";
+    }
+
+    /**
+     * HTTP 요청 파라미터 Map으로 반환
+     * @RequestParam Map<String, Object>
+     * 모든 요청파라미터를 Map으로 한번에 받을 수 있다.
+     * ResponseBody 애노테이션 즉 API방식이 아닌 일반 Controller여도 받을 수 있다.
+     */
+    @ResponseBody
+    @RequestMapping("/request-param-map")
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap, HttpServletResponse response) throws IOException {
+        log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
 
         return "ok";
     }
