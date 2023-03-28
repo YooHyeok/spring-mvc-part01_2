@@ -106,6 +106,7 @@ public class RequestParamController {
      * @RequestParam Map<String, Object>
      * 모든 요청파라미터를 Map으로 한번에 받을 수 있다.
      * ResponseBody 애노테이션 즉 API방식이 아닌 일반 Controller여도 받을 수 있다.
+     * ?age=14&age=15 형태와 같이 동일한 파라미터명을 사용해서 복수개를 가질 경우 MultiValueMap<String, Object>를 사용한다.
      */
     @ResponseBody
     @RequestMapping("/request-param-map")
