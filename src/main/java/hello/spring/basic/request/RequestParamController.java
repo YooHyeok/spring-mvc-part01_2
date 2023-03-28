@@ -40,4 +40,32 @@ public class RequestParamController {
 
         return "ok";
     }
+
+    /**
+     * HTTP 요청 파라미터 V3
+     * @RequestParam
+     * 요청 파라미터 이름과 같다면 ("파라미터명") 생략 가능
+     */
+    @ResponseBody
+    @RequestMapping("/request-param-v3")
+    public String requestParamV3(@RequestParam String username,
+                                 @RequestParam int age) {
+        log.info("username={}, age={}", username, age);
+
+        return "ok";
+    }
+
+    /**
+     * HTTP 요청 파라미터 V4
+     * @RequestParam
+     * 요청 파라미터 이름과 같다면 애노테이션 생략 가능
+     */
+    @ResponseBody
+    @RequestMapping("/request-param-v4")
+    public String requestParamV4(String username,
+                                 int age) {
+        log.info("username={}, age={}", username, age);
+
+        return "ok";
+    }
 }
