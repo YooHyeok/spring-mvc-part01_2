@@ -22,4 +22,15 @@ public class MappingController {
         log.info("helloBasic");
         return "ok";
     }
+
+    /**
+     * method 특정 HTTP 메서드 요청만 허용
+     * GET, HEAD, POST, PUT, PATCH, DELETE
+     * 요청방식 method를 설정하지 않으면 모든 요청 method를 허용한다. (Get으로 지정한 뒤 Post로 요청하면 405에러가 발생한다.)
+     */
+    @RequestMapping(value = "/mapping-get-v1", method = RequestMethod.GET)
+    public String mappingGetV1() {
+        log.info("mappingGetV1");
+        return "ok";
+    }
 }
