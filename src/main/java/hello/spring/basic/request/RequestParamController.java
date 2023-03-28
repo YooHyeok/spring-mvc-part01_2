@@ -68,4 +68,19 @@ public class RequestParamController {
 
         return "ok";
     }
+
+    /**
+     * HTTP 요청 파라미터 필수
+     * @RequestParam
+     * required [true/false] 기본값 true시 파라미터 반드시 필요(없으면 오류)
+     * false시 해당 파라미터가 없어도 통신 허용
+     */
+    @ResponseBody
+    @RequestMapping("/request-param-required")
+    public String requestParamRequired(@RequestParam(required = true) String username,
+                                 @RequestParam(required = false) Integer age) { //int는 null이 들어갈 수 없으므로 Integer로 변경
+        log.info("username={}, age={}", username, age);
+
+        return "ok";
+    }
 }
