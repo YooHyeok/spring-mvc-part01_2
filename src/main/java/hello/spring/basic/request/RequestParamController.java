@@ -1,7 +1,9 @@
 package hello.spring.basic.request;
 
+import hello.spring.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -112,6 +114,21 @@ public class RequestParamController {
     @RequestMapping("/request-param-map")
     public String requestParamMap(@RequestParam Map<String, Object> paramMap, HttpServletResponse response) throws IOException {
         log.info("username={}, age={}", paramMap.get("username"), paramMap.get("age"));
+
+        return "ok";
+    }
+
+    /**
+     * HTTP 요청 파라미터
+     * @ModelAttribute
+     * Command객체의 Property(setXxx/getXxx)중 Setter를 호출하여 파라미터 값 바인딩
+     */
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        log.info("helloData={}", helloData); // ToString에 의해 HelloData(username=hello, age=15) 출력
 
         return "ok";
     }
