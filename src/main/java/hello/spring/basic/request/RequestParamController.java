@@ -26,4 +26,18 @@ public class RequestParamController {
         log.info("username={}, age={}", username, age);
         response.getWriter().write("OK");
     }
+
+    /**
+     * HTTP 요청 파라미터 V2
+     * @RequestParam
+     * 요청 파라미터 이름을 다르게 쓰고싶다면 애노테이션에 파라미터명을 입력하고 변수명을 다르게 입력한다.
+     */
+    @ResponseBody
+    @RequestMapping("/request-param-v2")
+    public String requestParamV2(@RequestParam("username") String memberName,
+                                 @RequestParam("age") int memberAge) {
+        log.info("username={}, age={}", memberName, memberAge);
+
+        return "ok";
+    }
 }
