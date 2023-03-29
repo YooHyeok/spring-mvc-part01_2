@@ -1,6 +1,7 @@
 package hello.spring.basic.request;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class RequestBodyStringController {
      * [Postman] -> Body - raw:text
      */
     @PostMapping("/request-body-string-v1")
-    public void requestBodyString(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void requestBodyStringV1(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletInputStream inputStream = request.getInputStream();
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         log.info("messageBody = {}",messageBody);
@@ -36,9 +37,21 @@ public class RequestBodyStringController {
      * [Postman] -> Body - raw:text
      */
     @PostMapping("/request-body-string-v2")
-    public void requestBodyString(InputStream inputStream, Writer writer) throws IOException {
+    public void requestBodyStringV2(InputStream inputStream, Writer writer) throws IOException {
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         log.info("messageBody = {}",messageBody);
         writer.write("ok");
+    }
+
+    /**
+     * HttpEntity<String>활용
+     * HttpHeader Body정보 직접 조회
+     * 응답에서도 사용이 가능하다.
+     */
+    @PostMapping("/request-body-string-v3")
+    public HttpEntity<String> requestBodyStringV3(HttpEntity<String> httpEntity) throws IOException {
+        String messageBody = httpEntity.getBody();
+        log.info("messageBody = {}",messageBody);
+        return new HttpEntity<>("ok");
     }
 }
