@@ -1,5 +1,6 @@
 package hello.spring.basic.response;
 
+import hello.spring.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +44,18 @@ public class ResponseBodyController {
     @GetMapping("/response-body-string-v3")
     public String responseBodyV3() {
         return "ok";
+    }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping("/response-body-json-v1")
+    public ResponseEntity<HelloData> responseBodyV4() {
+        HelloData helloData = new HelloData();
+        helloData.setUsername("userA");
+        helloData.setAge(20);
+
+        return new ResponseEntity<>(helloData, HttpStatus.OK);
     }
 }
