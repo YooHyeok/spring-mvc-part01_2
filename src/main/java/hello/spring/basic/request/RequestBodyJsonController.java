@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +28,6 @@ public class RequestBodyJsonController {
     /**
      * HttpMsgBody-JSON-V1
      * inputStream, ObjectMapper, HttpServletRequest, HttpServletResponse 활용
-     * @param request
-     * @param response
-     * @throws IOException
      */
     @PostMapping("/request-body-json-v1")
     public void requestBodyJsonV1(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -38,5 +37,18 @@ public class RequestBodyJsonController {
         HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);//json문자를 java객체로 변환
         log.info("username = {} , age = {}", helloData.getUsername(), helloData.getAge());
         response.getWriter().write("ok");
+    }
+
+    /**
+     * HttpMsgBody-JSON-V2
+     * @RequestBody, ObjectMapper, @ResponseBody 활용
+     */
+    @ResponseBody
+    @PostMapping("/request-body-json-v2")
+    public String requestBodyJsonV1(@RequestBody String messageBody) throws IOException {
+        log.info("messageBody = {}", messageBody);
+        HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);//json문자를 java객체로 변환
+        log.info("username = {} , age = {}", helloData.getUsername(), helloData.getAge());
+        return "ok";
     }
 }
