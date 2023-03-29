@@ -14,7 +14,7 @@ public class ResponseViewController {
      */
     @RequestMapping("/response-view-v1")
     public ModelAndView responseViewV1() {
-        ModelAndView mav = new ModelAndView("response/hello").addObject("data", "hello!");
+        ModelAndView mav = new ModelAndView("basic/response/hello").addObject("data", "hello!");
         return mav;
     }
 
@@ -25,14 +25,14 @@ public class ResponseViewController {
     @RequestMapping("/response-view-v2")
     public String responseViewV2(Model model) {
         model.addAttribute("data", "hello!");
-        return "response/hello";
+        return "basic/response/hello";
     }
 
     /**
      * Model 활용 void 반환 없음
      * /response/hello uri 매핑 주소와 View 논리 주소가 같으면 자동으로 반환해준다.
      */
-    @RequestMapping("/response/hello")
+    @RequestMapping("/basic/response/hello")
     public void responseViewV3(Model model) {
         model.addAttribute("data", "hello!");
     }
