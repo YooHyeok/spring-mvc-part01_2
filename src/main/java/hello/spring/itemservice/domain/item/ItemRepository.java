@@ -51,4 +51,11 @@ public class ItemRepository {
         findItem.setPrice(updateParam.getPrice());
         findItem.setQuantity(updateParam.getQuantity());
     }
+
+    /**
+     * HashMap store 데이터 초기화
+     */
+    public void clearStore() {
+        store.clear();
+    }
 }
