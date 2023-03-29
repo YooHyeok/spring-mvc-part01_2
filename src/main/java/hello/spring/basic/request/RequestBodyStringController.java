@@ -2,6 +2,9 @@ package hello.spring.basic.request;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,5 +56,17 @@ public class RequestBodyStringController {
         String messageBody = httpEntity.getBody();
         log.info("messageBody = {}",messageBody);
         return new HttpEntity<>("ok");
+    }
+
+    /**
+     * RequestEntity,ResponseEntity
+     * HttpHeader : 요청에서 사용, Body정보 직접 조회
+     * ResponseEntity : 응답에서 사용, 상태정보를 담을 수 있다. (Created - 201)
+     */
+    @PostMapping("/request-body-string-v4")
+    public ResponseEntity<String> requestBodyStringV4(RequestEntity<String> httpEntity) throws IOException {
+        String messageBody = httpEntity.getBody();
+        log.info("messageBody = {}",messageBody);
+        return new ResponseEntity<>("ok", HttpStatus.CREATED);
     }
 }
