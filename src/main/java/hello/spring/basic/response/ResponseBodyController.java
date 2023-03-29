@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -47,15 +48,33 @@ public class ResponseBodyController {
     }
 
     /**
-     *
-     * @return
+     * 응답 API JSON V1
+     * ResponseEntity 활용 - 상태코드 변경 가능
+     * @return ResponseEntity
      */
     @GetMapping("/response-body-json-v1")
-    public ResponseEntity<HelloData> responseBodyV4() {
+    public ResponseEntity<HelloData> responseBodyJsonV1() {
         HelloData helloData = new HelloData();
         helloData.setUsername("userA");
         helloData.setAge(20);
 
         return new ResponseEntity<>(helloData, HttpStatus.OK);
+    }
+
+    /**
+     * 응답 API JSON V2
+     * @ResponseBody 커맨드객체 반환
+     * @ResponseStatus 애노테이션 활용 - 상태코드 변경
+     * @return HelloData
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @GetMapping("/response-body-json-v2")
+    public HelloData responseBodyJsonV2() {
+        HelloData helloData = new HelloData();
+        helloData.setUsername("userA");
+        helloData.setAge(20);
+
+        return helloData;
     }
 }
