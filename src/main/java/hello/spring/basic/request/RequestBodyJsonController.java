@@ -45,9 +45,21 @@ public class RequestBodyJsonController {
      */
     @ResponseBody
     @PostMapping("/request-body-json-v2")
-    public String requestBodyJsonV1(@RequestBody String messageBody) throws IOException {
+    public String requestBodyJsonV2(@RequestBody String messageBody) throws IOException {
         log.info("messageBody = {}", messageBody);
         HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);//json문자를 java객체로 변환
+        log.info("username = {} , age = {}", helloData.getUsername(), helloData.getAge());
+        return "ok";
+    }
+
+    /**
+     * HttpMsgBody-JSON-V3
+     * @RequestBody, @ResponseBody 활용
+     */
+    @ResponseBody
+    @PostMapping("/request-body-json-v3")
+    public String requestBodyJsonV3(@RequestBody HelloData helloData) throws IOException {
+        log.info("messageBody = {}", helloData);
         log.info("username = {} , age = {}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
