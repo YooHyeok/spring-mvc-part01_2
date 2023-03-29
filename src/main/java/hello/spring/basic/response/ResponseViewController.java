@@ -27,4 +27,13 @@ public class ResponseViewController {
         model.addAttribute("data", "hello!");
         return "response/hello";
     }
+
+    /**
+     * Model 활용 void 반환 없음
+     * /response/hello uri 매핑 주소와 View 논리 주소가 같으면 자동으로 반환해준다.
+     */
+    @RequestMapping("/response/hello")
+    public void responseViewV3(Model model) {
+        model.addAttribute("data", "hello!");
+    }
 }
