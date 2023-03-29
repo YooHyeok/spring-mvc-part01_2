@@ -2,7 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- 서블릿컨텍스트를 자동으로 포함하는 @{} URL 링크표현식 사용하여 상대경로에서 절대경로로 변경 -->
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <!--    <link href="../css/bootstrap.min.css" rel="stylesheet">-->
 </head>
 <body>
 
@@ -13,8 +16,14 @@
 
     <div class="row">
         <div class="col">
+            <!--      @{} URL링크표현식과 리터럴 대체 문법 |...| 사용      -->
             <button class="btn btn-primary float-end"
-                    onclick="location.href='addForm.html'" type="button">상품 등록</button>
+                    onclick="location.href='addForm.html'"
+                    th:onclick="|location.href='@{/basic/items/add}'|"
+                    type="button">상품 등록</button>
+            <!--<button class="btn btn-primary float-end"
+                    onclick="location.href='addForm.html'"
+                    type="button">상품 등록</button>-->
         </div>
     </div>
 
@@ -22,7 +31,17 @@
     <div>
         <table class="table">
             <thead>
-            <tr>
+            <!-- th:each와 ${} 변수표현식을 사용하여 프로퍼티 접근을 통한 반복  -->
+            <tr th:each="item : ${items}">
+                <td>10</td>
+                <!-- URL링크표현식 중 변수를 참조하는 문법을 적용한다. {A}(A=${a.b}) -> 뒤에서부터 a.b를 A라는 변수에 담은뒤 {A}에서 해당 값을 참조. -->
+                <td><a href="/item.html" th:href="@{/basic/items/{itemId}(itemId=${item.id})}" th:text="${item.id}">회원id</a></td>
+                <!--리터럴 대체 표현식 || 를 활용하여 url연산처리 -->
+                <td><a href="/item.html" th:href="@{|/basic/items/${item.id}|}" th:text="${item.itemName}">상품명</a></td>
+                <td th:text="${item.price}">10000</td>
+                <td th:text="${item.quantity}">10</td>
+            </tr>
+            <!--<tr>
                 <th>ID</th>
                 <th>상품명</th>
                 <th>가격</th>
@@ -31,17 +50,17 @@
             </thead>
             <tbody>
             <tr>
-                <td><a href="../../static/html/item.html">1</a></td>
-                <td><a href="../../static/html/item.html">테스트 상품1</a></td>
+                <td><a href="/item.html">1</a></td>
+                <td><a href="/item.html">테스트 상품1</a></td>
                 <td>10000</td>
                 <td>10</td>
             </tr>
             <tr>
-                <td><a href="../../static/html/item.html">2</a></td>
-                <td><a href="../../static/html/item.html">테스트 상품2</a></td>
+                <td><a href="/item.html">2</a></td>
+                <td><a href="/item.html">테스트 상품2</a></td>
                 <td>20000</td>
                 <td>20</td>
-            </tr>
+            </tr>-->
             </tbody>
         </table>
     </div>
