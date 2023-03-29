@@ -46,4 +46,24 @@ class ItemRepositoryTest {
         assertThat(result.size()).isEqualTo(2); // result의 크기가 2 인가.
         assertThat(result).contains(item1, item2); // result안에 item1과 item2 객체가 각각 포함되어있는가
     }
+
+    @Test
+    void updateItem() {
+        //given
+        Item item1 = new Item("item1", 10000, 10);
+
+        Item savedItem = itemRepository.save(item1);
+        Long itemId = savedItem.getId();
+
+        //when
+        Item updateParam = new Item("item2", 20000, 30);
+        itemRepository.update(itemId, updateParam); //저장
+
+        //then
+        Item findItem = itemRepository.findById(itemId);
+        assertThat(findItem.getItemName()).isEqualTo(updateParam.getItemName());
+        assertThat(findItem.getPrice()).isEqualTo(updateParam.getPrice());
+        assertThat(findItem.getQuantity()).isEqualTo(updateParam.getQuantity());
+
+    }
 }
