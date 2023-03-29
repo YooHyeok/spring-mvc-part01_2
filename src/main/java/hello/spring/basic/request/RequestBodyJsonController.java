@@ -77,4 +77,19 @@ public class RequestBodyJsonController {
         log.info("username = {} , age = {}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
+
+    /**
+     * HttpMsgBody-JSON-V5
+     * @RequestBody, @ResponseBody 활용
+     * @RequestBody를 통해 들어온 커맨드객체 타입으로 반환 하게 되면
+     * @ResponseBody에 의해 커맨드 객체가 JSON으로 변환되어 HttpMessageBody에 반환된다.
+     *
+     */
+    @ResponseBody
+    @PostMapping("/request-body-json-v5")
+    public HelloData requestBodyJsonV5(@RequestBody HelloData helloData) throws IOException {
+        log.info("messageBody = {}", helloData);
+        log.info("username = {} , age = {}", helloData.getUsername(), helloData.getAge());
+        return helloData;
+    }
 }
