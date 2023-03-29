@@ -132,4 +132,18 @@ public class RequestParamController {
 
         return "ok";
     }
+
+    /**
+     * HTTP 요청 파라미터
+     * @ModelAttribute 생략 가능
+     */
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData) {
+
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        log.info("helloData={}", helloData); // ToString에 의해 HelloData(username=hello, age=15) 출력
+
+        return "ok";
+    }
 }
