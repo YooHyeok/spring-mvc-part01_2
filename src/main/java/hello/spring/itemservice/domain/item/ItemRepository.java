@@ -39,4 +39,16 @@ public class ItemRepository {
     public List<Item> findAll() {
         return new ArrayList<>(store.values());
     }
+
+    /**
+     * 상품 갱신
+     * @param itemId
+     * @param updateParam
+     */
+    public void update(Long itemId, Item updateParam) {
+        Item findItem = findById(itemId);
+        findItem.setItemName(updateParam.getItemName());
+        findItem.setPrice(updateParam.getPrice());
+        findItem.setQuantity(updateParam.getQuantity());
+    }
 }
