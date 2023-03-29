@@ -28,4 +28,17 @@ public class RequestBodyStringController {
         log.info("messageBody = {}",messageBody);
         response.getWriter().write("ok");
     }
+
+
+    /**
+     * inputStream과 Writer를 매개변수로 사용
+     * messageBody 데이터 Read, 및 Wtrie
+     * [Postman] -> Body - raw:text
+     */
+    @PostMapping("/request-body-string-v2")
+    public void requestBodyString(InputStream inputStream, Writer writer) throws IOException {
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+        log.info("messageBody = {}",messageBody);
+        writer.write("ok");
+    }
 }
