@@ -31,4 +31,12 @@ public class ItemRepository {
     public Item findById(Long id) {
         return store.get(id);
     }
+
+    /**
+     * 상품 전체 조회
+     * @return new ArrayList<>(store.values()) - store에 있는 모든 값 추출후 ArrayList에 저장
+     */
+    public List<Item> findAll() {
+        return new ArrayList<>(store.values());
+    }
 }
