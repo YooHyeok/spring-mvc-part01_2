@@ -3,6 +3,7 @@ package hello.spring.basic.request;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hello.spring.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,6 +60,19 @@ public class RequestBodyJsonController {
     @ResponseBody
     @PostMapping("/request-body-json-v3")
     public String requestBodyJsonV3(@RequestBody HelloData helloData) throws IOException {
+        log.info("messageBody = {}", helloData);
+        log.info("username = {} , age = {}", helloData.getUsername(), helloData.getAge());
+        return "ok";
+    }
+
+    /**
+     * HttpMsgBody-JSON-V4
+     * HttpEntity 활용
+     */
+    @ResponseBody
+    @PostMapping("/request-body-json-v4")
+    public String requestBodyJsonV4(HttpEntity<HelloData> httpEntity) throws IOException {
+        HelloData helloData = httpEntity.getBody();
         log.info("messageBody = {}", helloData);
         log.info("username = {} , age = {}", helloData.getUsername(), helloData.getAge());
         return "ok";
