@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -68,5 +70,17 @@ public class RequestBodyStringController {
         String messageBody = httpEntity.getBody();
         log.info("messageBody = {}",messageBody);
         return new ResponseEntity<>("ok", HttpStatus.CREATED);
+    }
+
+    /**
+     * @RequestBody, @ResponseBody
+     * @RequestBody : Body정보 편리하게 조회 가능
+     * @ResponseBody : 응답 결과를 HTTP 메시지 바디에 직접 담아서 전달
+     */
+    @ResponseBody
+    @PostMapping("/request-body-string-v5")
+    public String requestBodyStringV5(@RequestBody String messageBody) throws IOException {
+        log.info("messageBody = {}",messageBody);
+        return "ok";
     }
 }
