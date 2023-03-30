@@ -58,7 +58,7 @@ public class BasicItemController {
     public String addItemV4(Item item, RedirectAttributes redirectAttributes) { //저장 Version4 - RedirecAttribute
 
         Item savedItem = itemRepository.save(item);
-        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("itemId", savedItem.getId()); //redirect의 매핑주소에 쿼리파라미터 형태로 작성된다.
         redirectAttributes.addAttribute("status", true);
         return "redirect:/basic/items/{itemId}"; // [URL] : localhsot:8080/basic/items/3?satus=true
     }
