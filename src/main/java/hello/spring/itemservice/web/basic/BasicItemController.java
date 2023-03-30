@@ -54,7 +54,13 @@ public class BasicItemController {
      * ModelAttribute 애노테이션을 생략하여도 자동으로 소문자로 치환하여 Model에 담아준다.
      */
     @PostMapping("/add")
-    public String addItemV2(Item item) {
+    public String addItemV3(Item item) { //저장 Version3 - PRG 패턴 적용
+
+        itemRepository.save(item);
+        return "redirect:/basic/items/"+item.getId();
+    }
+
+    public String addItemV2(Item item) { //저장 Version2 - @ModelAttribute 생략
 
         itemRepository.save(item);
         return "basic/item";
@@ -63,7 +69,7 @@ public class BasicItemController {
     public String addItemV1(@RequestParam String itemName,
                             @RequestParam Integer price,
                             @RequestParam Integer quantity,
-                            Model model) {
+                            Model model) { //저장 Version1 - @RequestParam
 
 //        Item item = new Item(itemName, price, quantity);
         Item item = new Item();
