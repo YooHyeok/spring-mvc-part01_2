@@ -50,13 +50,16 @@ public class BasicItemController {
 
     /**
      * 상품 저장
-     * @param itemName
-     * @param price
-     * @param quantity
      * @param model
-     * @return
      */
     @PostMapping("/add")
+    public String addItemV2(@ModelAttribute Item item, Model model) {
+
+        Item savedItem = itemRepository.save(item);
+        model.addAttribute("item", savedItem);
+        return "basic/item";
+    }
+
     public String addItemV1(@RequestParam String itemName,
                             @RequestParam Integer price,
                             @RequestParam Integer quantity,
