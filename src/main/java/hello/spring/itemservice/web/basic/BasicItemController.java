@@ -49,15 +49,14 @@ public class BasicItemController {
     }
 
     /**
-     * 상품 저장
-     * @param model
+     * 상품 저장 - @ModelAttribute
+     * ModealAttribute의 ("") 속성을 생략할 경우 ex 객체 클래스명의 첫글자를 소문자로 치환하여 Model에 담는다.
+     * ModelAttribute 애노테이션을 생략하여도 자동으로 소문자로 치환하여 Model에 담아준다.
      */
     @PostMapping("/add")
-    public String addItemV2(@ModelAttribute("item") Item item/*, Model model*/) {
+    public String addItemV2(Item item) {
 
         itemRepository.save(item);
-//        Item savedItem = itemRepository.save(item);
-//        model.addAttribute("item", savedItem);
         return "basic/item";
     }
 
