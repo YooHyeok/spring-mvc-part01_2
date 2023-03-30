@@ -53,10 +53,11 @@ public class BasicItemController {
      * @param model
      */
     @PostMapping("/add")
-    public String addItemV2(@ModelAttribute Item item, Model model) {
+    public String addItemV2(@ModelAttribute("item") Item item/*, Model model*/) {
 
-        Item savedItem = itemRepository.save(item);
-        model.addAttribute("item", savedItem);
+        itemRepository.save(item);
+//        Item savedItem = itemRepository.save(item);
+//        model.addAttribute("item", savedItem);
         return "basic/item";
     }
 
