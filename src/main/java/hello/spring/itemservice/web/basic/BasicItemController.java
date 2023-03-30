@@ -86,6 +86,17 @@ public class BasicItemController {
     }
 
     /**
+     * 상품 수정 저장
+     * return redirect:/상품상세
+     */
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+
+       itemRepository.update(itemId, item);
+        return "redirect:/basic/items/{itemId}";
+    }
+
+    /**
      * 테스트용 데이터 추가
      */
     @PostConstruct
