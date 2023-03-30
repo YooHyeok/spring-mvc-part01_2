@@ -59,6 +59,7 @@ public class BasicItemController {
 
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId()); //redirect의 매핑주소에 쿼리파라미터 형태로 작성된다.
+        redirectAttributes.addFlashAttribute("itemId", savedItem.getId()); //session에 값을 담은뒤 messageBody에 담아서 넘긴다.
         redirectAttributes.addAttribute("status", true);
         return "redirect:/basic/items/{itemId}"; // [URL] : localhsot:8080/basic/items/3?satus=true
     }
