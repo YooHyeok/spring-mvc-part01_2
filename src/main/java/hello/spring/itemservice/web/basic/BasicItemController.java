@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -54,6 +55,14 @@ public class BasicItemController {
      * ModelAttribute 애노테이션을 생략하여도 자동으로 소문자로 치환하여 Model에 담아준다.
      */
     @PostMapping("/add")
+    public String addItemV4(Item item, RedirectAttributes redirectAttributes) { //저장 Version4 - RedirecAttribute
+
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/basic/items/{itemId}"; // [URL] : localhsot:8080/basic/items/3?satus=true
+    }
+
     public String addItemV3(Item item) { //저장 Version3 - PRG 패턴 적용
 
         itemRepository.save(item);
