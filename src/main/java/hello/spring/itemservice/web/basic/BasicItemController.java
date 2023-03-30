@@ -55,7 +55,10 @@ public class BasicItemController {
      * ModelAttribute 애노테이션을 생략하여도 자동으로 소문자로 치환하여 Model에 담아준다.
      */
     @PostMapping("/add")
-    public String addItemV4(Item item, RedirectAttributes redirectAttributes) { //저장 Version4 - RedirecAttribute
+    /**
+     * 저장 Version4 - RedirecAttribute
+     */
+    public String addItemV4(Item item, RedirectAttributes redirectAttributes) {
 
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId()); //redirect의 매핑주소에 쿼리파라미터 형태로 작성된다.
@@ -64,23 +67,31 @@ public class BasicItemController {
         return "redirect:/basic/items/{itemId}"; // [URL] : localhsot:8080/basic/items/3?satus=true
     }
 
-    public String addItemV3(Item item) { //저장 Version3 - PRG 패턴 적용
+    /**
+     * 저장 Version3 - PRG 패턴 적용
+     */
+    public String addItemV3(Item item) {
 
         itemRepository.save(item);
         return "redirect:/basic/items/"+item.getId();
     }
 
-    public String addItemV2(Item item) { //저장 Version2 - @ModelAttribute 생략
+    /**
+     * 저장 Version2 - @ModelAttribute 생략
+     */
+    public String addItemV2(Item item) {
 
         itemRepository.save(item);
         return "basic/item";
     }
 
+    /**
+     * 저장 Version1 - @RequestParam
+     */
     public String addItemV1(@RequestParam String itemName,
                             @RequestParam Integer price,
                             @RequestParam Integer quantity,
-                            Model model) { //저장 Version1 - @RequestParam
-
+                            Model model) {
 //        Item item = new Item(itemName, price, quantity);
         Item item = new Item();
         item.setItemName(itemName);
