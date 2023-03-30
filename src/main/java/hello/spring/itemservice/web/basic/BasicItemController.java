@@ -2,7 +2,6 @@ package hello.spring.itemservice.web.basic;
 
 import hello.spring.itemservice.domain.item.Item;
 import hello.spring.itemservice.domain.item.ItemRepository;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +27,7 @@ public class BasicItemController {
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
-        return "basic/items";
+        return "item/items";
     }
 
     /**
@@ -41,12 +40,12 @@ public class BasicItemController {
     public String item(@PathVariable long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
-            return "basic/item";
+            return "item/item";
     }
 
     @GetMapping("/add")
     public String addForm() {
-        return "basic/addForm";
+        return "item/addForm";
     }
 
     /**
@@ -82,7 +81,7 @@ public class BasicItemController {
     public String addItemV2(Item item) {
 
         itemRepository.save(item);
-        return "basic/item";
+        return "item/item";
     }
 
     /**
@@ -99,7 +98,7 @@ public class BasicItemController {
         item.setQuantity(quantity);
         Item savedItem = itemRepository.save(item);
         model.addAttribute("item", savedItem);
-        return "basic/item";
+        return "item/item";
     }
 
     /**
@@ -109,7 +108,7 @@ public class BasicItemController {
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "basic/editForm";
+        return "item/editForm";
     }
 
     /**
